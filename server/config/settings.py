@@ -86,7 +86,7 @@ USE_TZ = True
 
 STATIC_URL = '/staticfiles/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Ваша директория для статических файлов в проекте
+    os.path.join(BASE_DIR, 'site_meta/static'),  # Ваша директория для статических файлов в проекте
 ]
 
 # Директория для сбора всех статических файлов при развертывании

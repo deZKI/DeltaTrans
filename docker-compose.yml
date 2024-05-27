@@ -4,7 +4,7 @@ services:
   core:
     build: server
     volumes:
-      - static_volume:/app/static/
+      - static_volume:/app/staticfiles/
       - media_volume:/app/media/
     entrypoint: ["sh", "entrypoint.sh"]
     ports:
