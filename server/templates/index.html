@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="{{ about_us.favicon.url }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/main.global.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__wrapper">
+                <div class="header__logo">
+                    <a class="header__logo__link" href="/">
+                        <img class="header__logo__image" src="{{ about_us.logo.url }}" alt="Логотип"/>
+                    </a>
+                    <span class="header__logo__desc">{{ about_us.name }}</span>
+                </div>
+                <ul class="header__list">
+                    <li class="header__item"><a class="header__link" href="#">Главная</a></li>
+                    <li class="header__item"><a class="header__link" href="#">О нас</a></li>
+                    <li class="header__item"><a class="header__link" href="#">Новости</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <section class="aboutus">
+            <div class="aboutus__container">
+                <div class="aboutus__wrapper">
+                    <div class="aboutus__slider">
+                        <button class="aboutus__slider__prev" style="left: 0;" onclick="prevAboutusSlide()">&#10094;</button>
+                        <div class="aboutus__slider__container">
+                            {% for slide in about_us_slides %}
+                            <img class="aboutus__slider__slide" src="{{ slide.image.url }}" alt="слайд" />
+                            {% endfor %}
+                        </div>
+                        <button class="aboutus__slider__next" style="right: 0;" onclick="nextAboutusSlide()">&#10095;</button>
+                    </div>
+                    <div class="aboutus__intro">
+                        <p class="aboutus__intro__desc">
+                            {{ about_us.description }}
+                        </p>
+                        <button class="aboutus__intro__button">Читать далее</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="news">
+            <div class="news__container">
+                <div class="news__wrapper">
+                    <div class="news__slider">
+                        {% for post in posts %}
+                        <div class="news__slide">
+                            <div class="news__content">
+                                <h3 class="news__content__title">{{ post.title }}</h3>
+                                <p class="news__content__desc">{{ post.content|truncatewords:30 }}</p>
+                                <div class="news__content__controls">
+                                    <button class="news__content__readmore">Подробнее</button>
+                                    <div class="news__content__buttons">
+                                        <button class="news__content__prev" onclick="prevNewsSlide()">&#10094;</button>
+                                        <span class="news__content__counts">{{ forloop.counter }} / {{ posts|length }}</span>
+                                        <button class="news__content__next" onclick="nextNewsSlide()">&#10095;</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="news__image">
+                                {% if post.image %}
+                                <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__wrapper">
+                <div class="footer__logo">
+                    <a class="footer__logo__link" href="/">
+                        <img class="footer__logo__image" src="{{ about_us.logo.url }}" alt="Логотип"/>
+                    </a>
+                    <span class="footer__logo__desc">{{ about_us.name }}</span>
+                </div>
+                <div class="footer__contacts">
+                    Адрес: {{ about_us.address }}<br />
+                    Email: {{ about_us.email }}<br />
+                    Телефон: {{ about_us.phone }}
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
